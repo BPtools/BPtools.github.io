@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--<link id="favicon" rel="icon" href="" type="image/x-icon">-->
-    <title>Giveaway Manager</title>
+    <title>Giveaway Tools</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,6 +37,30 @@
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            user-select: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .home-button:hover,
+        .home-button:focus {
+            background-color: #28a745;
+            color: #121212;
         }
 
         .bottom-box {
@@ -321,6 +344,7 @@
     </style>
 </head>
 <body>
+<a href="/" class="home-button">Home</a>
     <div class="wrapper">
         <div class="container">
             <h1>Multi-Giveaway Tool</h1>
