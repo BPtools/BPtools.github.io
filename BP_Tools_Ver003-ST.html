@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop Tools</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #212121;
+        color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 40px 20px;
+        box-sizing: border-box;
+    }
+
+    .home-button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: #2d2d2d;
+        color: #f0f0f0;
+        padding: 6px 12px;
+        font-size: 14px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        user-select: none;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .home-button:hover,
+    .home-button:focus {
+        background-color: #28a745;
+        color: #121212;
+    }
+
+    .tools-wrapper {
+        width: 90%;
+        max-width: 1000px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+        gap: 30px 20px;
+        justify-items: center;
+        align-items: start;
+    }
+
+    .tools-wrapper > .tool-card:nth-child(3) {
+        grid-column: 1 / 3;
+        justify-self: center;
+    }
+
+    .tool-card {
+        width: 450px;
+        height: 290px;
+        background-color: #2d2d2d;
+        padding: 22px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .tool-card h1 {
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 18px;
+    }
+
+    .tool-desc {
+        color: #cfcfcf;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-top: 6px;
+        margin-bottom: 18px;
+        flex: 1 0 auto;
+        padding-left: 32px;
+        padding-right: 32px;
+        text-align: left;
+    }
+
+    .tool-desc p {
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    .tool-desc ul {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+    a.bookmarklet-button {
+        text-decoration: none;
+        display: inline-block;
+        width: 220px;
+        height: 48px;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        line-height: 48px;
+        text-align: center;
+        background-color: #28a745;
+        cursor: grab;
+        user-select: none;
+        margin: 0 auto;
+    }
+
+    a.bookmarklet-button:active {
+        cursor: grabbing;
+    }
+
+    #popup {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #ff4d4f;
+        padding: 15px 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        font-size: 16px;
+        color: white;
+        display: none;
+    }
+
+    #disclaimer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.75);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    #disclaimer-box {
+        width: 600px;
+        max-width: 90%;
+        background: #2d2d2d;
+        padding: 25px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.45);
+    }
+
+    #disclaimer-box h1 {
+        margin-top: 0;
+        margin-bottom: 18px;
+    }
+
+    #disclaimer-box p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 22px;
+        color: #cfcfcf;
+    }
+
+    #close-disclaimer {
+        background-color: #ff4d4f;
+        color: white;
+        border: none;
+        padding: 12px 26px;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #close-disclaimer:hover {
+        background-color: #d63a3c;
+    }
+
+    @media (max-width: 1000px) {
+        .tools-wrapper {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+        .tools-wrapper > .tool-card:nth-child(3) {
+            grid-column: auto;
+            justify-self: auto;
+        }
+        .tool-card {
+            width: 90vw;
+            height: auto;
+            min-height: 260px;
+        }
+        a.bookmarklet-button {
+            width: 60%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<a href="/" class="home-button">Home</a>
+
+<div id="disclaimer-overlay">
+    <div id="disclaimer-box">
+        <h1>ATTENTION</h1>
+        <p>DO NOT MODIFY THESE TOOLS</br>Running a modified version of these tools can result in you being rate limited or, in extereme cases, account moderation. These tools are meant to facilitate the shopping experience and should not be used maliciously.</p>
+        <button id="close-disclaimer">Close</button>
+    </div>
+</div>
+
+<div class="tools-wrapper">
+    <div class="tool-card" id="tool-reseller">
+        <div>
+            <h1>Multi-Reseller</h1>
+            <div class="tool-desc">
+                <p>The Multi-Reseller tool allows for the following:</p>
+                <ul>
+                    <li>List multiple items for resale at once</li>
+                    <li>Allows for individual ID inputs as well as ranges</li>
+                    <li>All listed items will have the same inputted price</li>
+                </ul>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:center;">
+            <a id="btn-reseller" class="bookmarklet-button" draggable="true" title="Drag this to your Bookmarks Bar | CTRL + SHIFT + B">Multi-Reseller</a>
+        </div>
+    </div>
+
+    <div class="tool-card" id="tool-delist">
+        <div>
+            <h1>De-Lister</h1>
+            <div class="tool-desc">
+                <p>The De-Lister tool does the following:</p>
+                <ul>
+                    <li>Removes all items listed for resale by your account on the currently viewed page of sellers</li>
+                    <li>There are no secondary inputs, only a confirmation message</li>
+                </ul>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:center;">
+            <a id="btn-delist" class="bookmarklet-button" draggable="true" title="Drag this to your Bookmarks Bar | CTRL + SHIFT + B">De-Lister</a>
+        </div>
+    </div>
+
+    <div class="tool-card" id="tool-crate">
+        <div>
+            <h1>Crate Opener</h1>
+            <div class="tool-desc">
+                <p>The Crate Opener tool allows for the following:</p>
+                <ul>
+                    <li>Open multiple Crates at once with no animations</li>
+                    <li>Allows for individual ID inputs as well as ranges</li>
+                    <li>You'll have to manually check Crate History to see what you received</li>
+                </ul>
+            </div>
+        </div>
+        <div style="display:flex;justify-content:center;">
+            <a id="btn-crate" class="bookmarklet-button" draggable="true" title="Drag this to your Bookmarks Bar | CTRL + SHIFT + B">Crate Opener</a>
+        </div>
+    </div>
+</div>
+
+<div id="popup"></div>
+
+<script>
+    const popup = document.getElementById('popup');
+    let popupTimeout = null;
+
+    function showPopup(msg) {
+        popup.textContent = msg;
+        popup.style.display = 'block';
+        clearTimeout(popupTimeout);
+        popupTimeout = setTimeout(() => {
+            popup.style.display = 'none';
+        }, 3000);
+    }
+
+    function initBookmarklets() {
+        const resellerCode = document.getElementById('code-reseller').textContent.trim();
+        const delistCode = document.getElementById('code-delist').textContent.trim();
+        const crateCode = document.getElementById('code-crate').textContent.trim();
+
+        const btnReseller = document.getElementById('btn-reseller');
+        const btnDelist = document.getElementById('btn-delist');
+        const btnCrate = document.getElementById('btn-crate');
+
+        btnReseller.setAttribute('href', resellerCode);
+        btnDelist.setAttribute('href', delistCode);
+        btnCrate.setAttribute('href', crateCode);
+
+        [btnReseller, btnDelist, btnCrate].forEach(btn => {
+            btn.addEventListener('dragstart', e => {
+                try {
+                    e.dataTransfer.setData('text/plain', btn.href);
+                } catch (err) {}
+            });
+
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                showPopup("Drag this button to your Bookmarks Bar (CTRL + SHIFT + B)");
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initBookmarklets);
+
+    document.getElementById('close-disclaimer').addEventListener('click', () => {
+        document.getElementById('disclaimer-overlay').style.display = 'none';
+    });
+</script>
+
+<script type="text/plain" id="code-reseller">javascript:(async()=>{try{const itemId=window.location.pathname.split("/")[2];if(!itemId||isNaN(itemId))return alert("Item ID not found in URL");const input=prompt("Input Item IDs or Ranges (e.g. 100,102,105-108):","");if(input===null)return;const m={};document.querySelectorAll('.mb-6 .grid > div a').forEach(a=>{const rareMatch=a.href.match(/view-rare\/(\d+)/);if(!rareMatch)return;const rareID=rareMatch[1];const div=a.querySelector('div');if(!div)return;const id=div.textContent.trim().replace('#','');m[id]=rareID});if(Object.keys(m).length===0)return alert("No Items Found");const parseIds=str=>{const ids=new Set();for(const part of str.split(",")){if(part.includes("-")){const[start,end]=part.split("-").map(s=>s.trim());if(parseInt(end)<parseInt(start))return null;for(let i=parseInt(start);i<=parseInt(end);i++)ids.add(i)}else ids.add(parseInt(part.trim()))}return Array.from(ids)};let crateIds=parseIds(input);if(!crateIds)return alert("Only positive integers are allowed");const rareIds=[];const invalid=[];for(const id of crateIds){const rare=m[id.toString()];if(!rare)invalid.push(id);else rareIds.push(rare)}if(invalid.length>0)alert("Item IDs not found and skipped: "+invalid.join(", "));if(rareIds.length===0)return alert("No valid Item IDs to list");const priceInput=prompt("Enter Sale Price (Credits):","");if(priceInput===null)return;if(!/^[1-9]\d*$/.test(priceInput))return alert("Only positive whole credit values allowed");const price=parseInt(priceInput);alert("Open the Console (CTRL + SHIFT + I) to view progress");const token=document.querySelector('input[name="_token"]').value;let sold=0;for(let i=0;i<rareIds.length;i++){await fetch(%60https://www.brickplanet.com/shop/${itemId}/list-for-resale%60,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},credentials:"include",body:new URLSearchParams({_token:token,backpack_id:rareIds[i],credits:price})});sold++;console.log(%60Item #${crateIds[i]} Listed%60);if(sold%9===0&&i!==rareIds.length-1){await new Promise(r=>setTimeout(r,1000));console.log("Pausing for 12 seconds...");await new Promise(r=>setTimeout(r,12000))}else await new Promise(r=>setTimeout(r,1000))}await new Promise(r=>setTimeout(r,1000));console.log(sold+" item"+(sold===1?"":"s")+" listed for resale!");alert(sold+" item"+(sold===1?"":"s")+" listed for resale!");location.reload()}catch(e){console.error(e);alert("ERROR")}})();</script>
+
+<script type="text/plain" id="code-delist">javascript:(async()=>{try{const itemId=window.location.pathname.split("/")[2];if(!itemId||isNaN(itemId))return alert("Item ID not found in URL");const token=document.querySelector('input[name="_token"]').value;const removeLinks=document.querySelectorAll('a[data-modal^="remove-from-sale-"]');if(removeLinks.length===0)return alert("You do not have any items listed for resale on this page of sellers");const confirmMessage=removeLinks.length===1?"Are you sure you want to delist this item?":`Are you sure you want to delist these ${removeLinks.length} items?`;if(!confirm(confirmMessage))return;const resellerIds=[];removeLinks.forEach(link=>{const modalId=link.getAttribute('data-modal');const match=modalId.match(/remove-from-sale-(\d+)-modal/);if(match)resellerIds.push(match[1])});let delistedCount=0;for(let i=0;i<resellerIds.length;i++){await fetch(`https://www.brickplanet.com/shop/${itemId}/remove-item-resale`,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},credentials:"include",body:new URLSearchParams({_token:token,reseller_id:resellerIds[i]})});delistedCount++;if(i!==resellerIds.length-1)await new Promise(r=>setTimeout(r,1000))}alert(`Successfully delisted ${delistedCount} item${delistedCount===1?"":"s"} listed for resale`);location.reload()}catch(e){alert("ERROR")}})();</script>
+
+<script type="text/plain" id="code-crate">javascript:(async()=>{try{const itemId=window.location.pathname.split("/")[2];if(!itemId||isNaN(itemId))return alert("Item ID not found in URL");const input=prompt("Input Crate IDs or ranges (e.g. 100,102,105-108):","");if(input===null)return;const m={};document.querySelectorAll('.mb-6 .grid > div a').forEach(a=>{const rareMatch=a.href.match(/view-rare\/(\d+)/);if(!rareMatch)return;const rareID=rareMatch[1];const crateDiv=a.querySelector('div');if(!crateDiv)return;const crateID=crateDiv.textContent.trim().replace('#','');m[crateID]=rareID;});if(Object.keys(m).length===0)return alert("No Crates Found");const parseIds=str=>{const ids=new Set();const parts=str.split(",");for(const part of parts){if(part.includes("-")){const [start,end]=part.split("-").map(s=>s.trim());if(!/^[1-9]\d*$/.test(start)||!/^[1-9]\d*$/.test(end))return null;if(parseInt(end)<parseInt(start))return null;for(let i=parseInt(start);i<=parseInt(end);i++)ids.add(i);}else{if(!/^[1-9]\d*$/.test(part.trim()))return null;ids.add(parseInt(part.trim()));}}return Array.from(ids);};let crateIds=parseIds(input);if(!crateIds)return alert("Only positive integers are allowed");const rareIds=[];const invalidCrates=[];for(const id of crateIds){const rare=m[id.toString()];if(!rare)invalidCrates.push(id);else rareIds.push(rare);}if(invalidCrates.length>0)alert("Crate IDs not found and skipped: "+invalidCrates.join(", "));if(rareIds.length===0)return alert("No valid Crate IDs to open");alert("Open the Console (CTRL + SHIFT + I) to view progress");const token=document.querySelector('input[name="_token"]').value;let openedCount=0;for(let i=0;i<rareIds.length;i++){await fetch(`https://www.brickplanet.com/shop/${itemId}/open-crate`,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},credentials:"include",body:new URLSearchParams({_token:token,crate_id:rareIds[i]})});openedCount++;console.log(`Crate #${crateIds[i]} Opened`);if(openedCount%9===0&&openedCount!==rareIds.length){await new Promise(r=>setTimeout(r,1000));console.log("Pausing for 12 seconds...");await new Promise(r=>setTimeout(r,12000));}else if(i!==rareIds.length-1){await new Promise(r=>setTimeout(r,1000));}}await new Promise(r=>setTimeout(r,1000));alert(`${openedCount} crate${openedCount===1?"":"s"} successfully opened!`);console.log(`${openedCount} crate${openedCount===1?"":"s"} successfully opened!`);location.reload();}catch(e){alert("ERROR");}})();</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BP Tools Home</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #212121;
+    color: #f0f0f0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spacer {
+    height: 30vh;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    position: relative;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border-bottom: 3px solid #28a745;
+    padding-bottom: 12px;
+    white-space: nowrap;
+  }
+
+  .nav-buttons {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  a {
+    background-color: #2d2d2d;
+    color: #f0f0f0;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    font-size: 1.3rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    min-width: 180px;
+    text-align: center;
+    user-select: none;
+  }
+
+  a:hover,
+  a:focus {
+    background-color: #28a745;
+    color: #121212;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 700px) {
+    h1 {
+      font-size: 2.2rem;
+      white-space: normal;
+      max-width: 90vw;
+    }
+    .nav-buttons {
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 20px;
+    }
+    a {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="spacer"></div>
+
+  <div class="content-wrapper">
+    <h1>Welcome to BP Tools</h1>
+
+    <div class="nav-buttons">
+      <a href="https://google.com" title="Go to Giveaway Tools">Giveaway Tools</a>
+      <a href="https://google.com" title="Go to Shop Tools">Shop Tools</a>
+      <a href="https://google.com" title="Go to Astro+ Tools">Astro+ Tools</a>
+    </div>
+  </div>
+
+</body>
+</html>
